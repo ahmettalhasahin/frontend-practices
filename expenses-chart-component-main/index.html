@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+	<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+	
+	<title>Frontend Mentor | Expenses chart component</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+	<!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+	<style>
+	html {
+		height: 100%;
+	}
+	body{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		background-color: hsl(27, 66%, 92%);
+		gap: 20px;
+		font-family: 'DM Sans', sans-serif;
+		font-size: 18px;
+		min-height: 100%;
+	}
+	.card{
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+	}
+	.header{
+		display: flex;
+		justify-content: space-between;
+		background-color: hsl(10, 79%, 65%);
+		padding: 15px;
+		border-radius: 10px;
+		color: white;
+	}
+	.balance-container{
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+	}
+	.balance{
+		font-size: 12px;
+	}
+	.balance-number{
+		font-size: 25px;
+	}
+	.logo{
+		display: flex;
+		align-items: center;
+		width: 45px;
+		margin-right: 5px;
+	}
+	.footer{
+		background-color: hsl(33, 100%, 98%);
+		padding: 15px;
+		border-radius: 10px;
+		padding: 20px;
+	}
+	.title{
+		font-weight: bold;
+		font-size: larger;
+		padding-left: 3px;
+	}
+	.graphs{
+		display: flex;
+		margin-top: 0px;
+		margin-bottom: 20px;
+	}
+	.amount{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 25px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+		width: fit-content;
+		border-radius: 4px;
+		background-color: hsl(25, 47%, 15%);
+		color: white;
+		padding: 2px 5px;
+		display: none;
+	}
+	.graph{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-end;
+		height: 180px;
+	}
+	.graph:hover .amount
+	{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 13px;
+	}
+	.graph-col{
+		display: flex;
+		background-color: hsl(10, 79%, 65%);
+		width: 35px;
+		border-radius: 5px;
+		margin: 2px 9px;
+
+	}
+	.col-name{
+		font-size: 12px;
+		color: hsl(28, 10%, 53%);
+		margin-top: 5px;
+	}
+	.line{
+		border: 1px solid hsl(27, 66%, 92%);
+	}
+	.total{
+		display: flex;
+		flex-direction: column;
+		margin-top: 20px;
+	}
+	.total-sentence{
+		color: hsl(28, 10%, 53%);
+		font-size: small;
+	}
+	.datas{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.total-num{
+		color: hsl(25, 47%, 15%);
+		font-size: xx-large;
+		font-family: 'DM Sans', sans-serif;
+		font-weight: 700;
+	}
+	.increase{
+		display: flex;
+		flex-direction: row-reverse;
+		color: hsl(25, 47%, 15%);
+		font-size: small;
+		font-weight: bolder;
+	}
+	.data-sentence{
+		color: hsl(28, 10%, 53%);
+		font-size: small;
+	}
+		.attribution { font-size: 11px; text-align: center; }
+		.attribution a { color: hsl(228, 45%, 44%); }
+	</style>
+</head>
+<body onload="OnPageLoad()">
+	<div class="card">
+		<div class="header">
+			<div class="balance-container">
+				<div class="balance">
+					My balance
+				</div>
+				<div class="balance-number">
+					$921.48
+				</div>
+			</div>
+			<div class="logo">
+				<svg width="72" height="48" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><circle fill="#382314" cx="48" cy="24" r="24"/><circle stroke="#FFF" stroke-width="2" cx="24" cy="24" r="23"/></g></svg>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="title">
+				Spending - Last 7 days
+			</div>
+			<div class="graphs">
+				<div class="graph">
+					<div class="amount">
+						<div class=""></div>
+					</div>
+					<div class="graph-col" style="height: 70px;" id="eventDiv">
+					</div>
+					<div class="col-name">
+						mon
+					</div>
+				</div>
+				<div class="graph">
+					<div class="amount">
+					</div>
+					<div class="graph-col" style="height: 70px;" id="eventDiv">
+					</div>
+					<div class="col-name">
+						tue
+					</div>
+				</div>
+				<div class="graph">
+					<div class="amount">
+					</div>
+					<div class="graph-col" style="height: 70px;" id="eventDiv">
+					</div>
+					<div class="col-name">
+						wed
+					</div>
+				</div>
+				<div class="graph">
+					<div class="amount">
+					</div>
+					<div class="graph-col" style="height: 70px;" id="eventDiv">
+					</div>
+					<div class="col-name">
+						thu
+					</div>
+				</div>
+				<div class="graph">
+					<div class="amount">
+					</div>
+					<div class="graph-col" style="height: 70px;" id="eventDiv">
+					</div>
+					<div class="col-name">
+						fri
+					</div>
+				</div>
+				<div class="graph">
+					<div class="amount">
+					</div>
+					<div class="graph-col" style="height: 70px;" id="eventDiv">
+					</div>
+					<div class="col-name">
+						sat
+					</div>
+				</div>
+				<div class="graph">
+					<div class="amount">
+					</div>
+					<div class="graph-col" style="height: 70px;" id="eventDiv">
+					</div>
+					<div class="col-name">
+						sun
+					</div>
+				</div>
+			</div>
+			<hr class="line">
+			<div class="total">
+				<div class="total-sentence">
+					Total this month
+				</div>
+				<div class="datas">
+					<div class="total-num">
+						$478.33
+					</div>
+					<div class="last-data">
+						<div class="increase">
+							+2.4%
+						</div>
+						<div class="data-sentence">
+							from last month
+						</div>
+					</div>
+				</div>		
+			</div>
+		</div>
+	</div>
+  
+	<div class="attribution">
+		Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+		Coded by <a href="#">Ahmet Talha Şahin</a>.
+	</div>
+
+	<script src="index.js"></script>
+</body>
+</html>
